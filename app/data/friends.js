@@ -1,6 +1,6 @@
-import { Module } from "module";
-
-var friends = {
+module.exports = friends = 
+[
+    {
     "name":"Ahmed",
     "scores":[
         5,
@@ -13,7 +13,6 @@ var friends = {
         5,
         4,
         1
-      ]
-  }
-
-module.exports = friends;
+        ]
+    }
+]
