@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <script src="https://code.jquery.com/jquery.js"></script>
+    </head>
+    <body>
+        <form action="#" method="post">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text"  name="name"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options1"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options2"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options3"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options4"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options5"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options6"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options7"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options8"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options9"></td>
+                </tr>
+                <tr>
+                    <td>Question: do food?</td>
+                    <td><input type="number" min="0" max="5" id="options10"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="submit"></td>
+                </tr>
+            </table>
+        </form>
+        <script>
+        $("body").on("click", '[submit]', function(event) {
+            event.preventDefault();
+            var choices = []
+            for (let i = 1; i <= 10; i++){
+                var x = $("#options" + i)
+                choices.push(x.val())
+            }
+            var newFriend = {
+                name: $("[name]").val().trim(),
+                scores: choices
+            };
+
+            $.post("/api/friends", newFriend)
+        });
+    </script>
+    </body>
+</html>
