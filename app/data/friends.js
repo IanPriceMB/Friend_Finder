@@ -1,18 +1,43 @@
 module.exports = friends = 
 [
     {
-    "name":"Ahmed",
+    "name":"Sarah",
     "scores":[
         5,
         1,
         4,
         4,
         5,
-        1,
-        2,
-        5,
+        ]
+    },
+    {
+    "name":"Ian",
+    "scores":[
         4,
-        1
+        4,
+        4,
+        4,
+        4,
+        ]
+    },
+    {
+    "name":"Amy",
+    "scores":[
+        2,
+        1,
+        3,
+        3,
+        2,
+        ]
+    },
+    {
+    "name":"Frank",
+    "scores":[
+        1,
+        5,
+        5,
+        1,
+        5,
         ]
     }
 ]

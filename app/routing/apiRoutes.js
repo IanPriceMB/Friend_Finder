@@ -1,5 +1,4 @@
 var friends = require('../data/friends.js');
-var bodyParser = require('body-parser');
 
 module.exports = function(app){
     app.get("/api/friends", function(req, res) {
@@ -7,38 +6,29 @@ module.exports = function(app){
     });
 
     app.post("/api/friends", function(req, res) {
-        var newFriend = req.body;
-        friends.push(newFriend);
-
-        
-        var compatabilityArr = [];
-        var checkerArr = [];
-        var bestFriend;
-        function compatability() {
-            for (let i =0; i < friends.length; i ++){
-                var value = 0;
-                if (newFriend.name !== friends[i].name){
-                    for (let j = 0; j < newFriend.scores.length; j++){
-                        console.log(parseInt(newFriend.scores[j]))
-                        console.log(parseInt(friends[i].scores[j]))
-                        value += Math.abs((parseInt(newFriend.scores[j])) - (parseInt(friends[i].scores[j])))
-                    }
-                    compatabilityArr.push({friendScore: value, friendName: friends[i].name})
-                }
-            }
-            for (let x = 0; x < compatabilityArr.length; x++){
-                checkerArr.push(compatabilityArr[x].friendScore)
-            }
-            console.log(checkerArr)
-            var checker = Math.min.apply(null, checkerArr)
-            console.log(checker)
-            for (let k = 0; k < compatabilityArr.length; k++){
-                if (checker === compatabilityArr[k].friendScore){
-                    bestFriend = {Name: compatabilityArr[k].friendName, FriendValue: checker};
-                }
-            }
+        var bestMatch = {
+          name: "",
+          friendDifference: Infinity
+        };
+        var userData = req.body;
+        var userScores = userData.scores;
+        var totalDifference;
+    
+        for (var i = 0; i < friends.length; i++) {
+          var currentFriend = friends[i];
+          totalDifference = 0;
+          for (var j = 0; j < currentFriend.scores.length; j++) {
+            var currentFriendScore = currentFriend.scores[j];
+            var currentUserScore = userScores[j];
+            totalDifference += Math.abs(parseInt(currentUserScore) - parseInt(currentFriendScore));
+          }
+          if (totalDifference <= bestMatch.friendDifference) {
+            bestMatch.name = currentFriend.name;
+            bestMatch.photo = currentFriend.photo;
+            bestMatch.friendDifference = totalDifference;
+          }
         }
-        compatability();
-        res.json(bestFriend)
-    });
+        friends.push(userData);
+        res.json(bestMatch);
+      });
 }

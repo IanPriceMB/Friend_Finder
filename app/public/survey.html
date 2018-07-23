@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <script src="https://code.jquery.com/jquery.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </head>
     <body>
         <form action="#" method="post">
@@ -11,46 +12,25 @@
                     <td><input type="text"  name="name"></td>
                 </tr>
                 <tr>
-                    <td>Question: do food?</td>
+                    <td>Question: Food love?</td>
                     <td><input type="number" min="0" max="5" id="options1"></td>
                 </tr>
                 <tr>
-                    <td>Question: do food?</td>
+                    <td>Question: Anime love?</td>
                     <td><input type="number" min="0" max="5" id="options2"></td>
                 </tr>
                 <tr>
-                    <td>Question: do food?</td>
+                    <td>Question: Game love?</td>
                     <td><input type="number" min="0" max="5" id="options3"></td>
                 </tr>
                 <tr>
-                    <td>Question: do food?</td>
+                    <td>Question: Television love?</td>
                     <td><input type="number" min="0" max="5" id="options4"></td>
                 </tr>
                 <tr>
-                    <td>Question: do food?</td>
+                    <td>Question: Book love?</td>
                     <td><input type="number" min="0" max="5" id="options5"></td>
                 </tr>
-                <tr>
-                    <td>Question: do food?</td>
-                    <td><input type="number" min="0" max="5" id="options6"></td>
-                </tr>
-                <tr>
-                    <td>Question: do food?</td>
-                    <td><input type="number" min="0" max="5" id="options7"></td>
-                </tr>
-                <tr>
-                    <td>Question: do food?</td>
-                    <td><input type="number" min="0" max="5" id="options8"></td>
-                </tr>
-                <tr>
-                    <td>Question: do food?</td>
-                    <td><input type="number" min="0" max="5" id="options9"></td>
-                </tr>
-                <tr>
-                    <td>Question: do food?</td>
-                    <td><input type="number" min="0" max="5" id="options10"></td>
-                </tr>
-                <tr>
                     <td><input type="submit" value="submit" id="submit"></td>
                 </tr>
             </table>
@@ -58,6 +38,7 @@
         <script>
         $("body").on("click", '#submit', function(event) {
             event.preventDefault();
+            $('.container').remove()
             var choices = []
             for (let i = 1; i <= 10; i++){
                 var x = $("#options" + i)
@@ -69,7 +50,10 @@
             };
             $.post("/api/friends", newFriend)
             .then(function(data) {
-            console.log("add.html", data);
+                $('body').append('<div class="container">')
+                $('.container').append('<row class="row row1"></row><row class="row row2">')
+                $('.row1').append('Name: ' + data.name)
+                $('.row2').append('Difference Index: ' + data.friendDifference)
             });
         });
     </script>
